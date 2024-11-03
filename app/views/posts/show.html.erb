@@ -1,0 +1,26 @@
+<h1>Title: <%= @post.title %></h1>
+
+<!-- ><p>Post's user id: <%= @post.user_id %></p> -->
+
+<p>Author: <%= User.find(@post.user_id).name %></p>
+
+<!-- ><p><%= @current_user.id %></p> -->
+
+<p>Body: <%= @post.body %></p>
+
+<ul>
+  <li><%= link_to "Update", edit_post_path(@post) %></li>
+  <li><%= link_to "Delete", post_path(@post), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+
+<h2>Comments</h2>
+<%= render @post.comments %>
+
+<h2>Add a comment:</h2>
+<%= render "comments/form", post: @post %>
+
+<br>
+<p>Back to home page: <%= link_to "Posts", root_path %></p>

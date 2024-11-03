@@ -1,0 +1,22 @@
+<h1>Posts</h1>
+
+<% if @user %>
+	<h2>Welcome <%= @user.name %>!</h2><br>
+	
+	<%= link_to "Log Out Page", logout_path %>
+<% end %>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+		<strong>Post name:</strong> <%= link_to post.title, post %><br>
+		<strong>Content:</strong> <%= post.body %><br>
+		<strong>Author:</strong>  <%= User.find(post.user_id).name %><br>
+		<strong>Number of comments:</strong> <%= post.comments.count %><br>
+		<strong>Last updated:</strong> <%= post.updated_at %><br>
+		<br>
+	</li>
+  <% end %>
+</ul>
+
+<%= link_to "New Post", new_post_path %>
